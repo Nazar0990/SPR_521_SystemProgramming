@@ -5,26 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_02_TaskManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Task Manager" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen">
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
+            <TextBlock Text="Інтервал:" VerticalAlignment="Center" Margin="5,0"/>
+            <ComboBox x:Name="intervalComboBox" Width="100">
+                <ComboBoxItem Content="1 сек"/>
+                <ComboBoxItem Content="2 сек"/>
+                <ComboBoxItem Content="5 сек"/>
+                <ComboBoxItem Content="Пауза"/>
+            </ComboBox>
             <Button Click="Button_Click">Refresh</Button>
             <Button Click="Button_Click_1">Kill</Button>
-            <Button Click="Button_Click_2">Close</Button>
             <Button Click="Button_Click_3">Show Info</Button>
-            <TextBox Width="300"></TextBox>
+            <TextBox x:Name="pathTextBox" Width="300" Margin="5,0"/>
             <Button Click="Button_Click_4">Start process</Button>
         </ToolBar>
-        <DataGrid x:Name="grid" AutoGenerateColumns="False">
+
+        <DataGrid x:Name="grid" 
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  Margin="5">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Process Name" Binding="{Binding ProcessName}" />
-                <DataGridTextColumn Header="PID" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="Total Processor Time" Binding="{Binding TotalProcessorTime}" />
-                <DataGridTextColumn Header="Priority" Binding="{Binding PriorityClass}" />
-                <DataGridTextColumn Header="User Name" Binding="{Binding UserName}" />
+                <DataGridTextColumn Header="Process Name" Binding="{Binding ProcessName}" Width="150"/>
+                <DataGridTextColumn Header="PID" Binding="{Binding Id}" Width="80"/>
+                <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime, StringFormat=dd.MM.yyyy HH:mm:ss}" Width="150"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="120"/>
+                <DataGridTextColumn Header="CPU Time" Binding="{Binding TotalProcessorTime}" Width="130"/>
+                <DataGridTextColumn Header="Memory (MB)" Binding="{Binding WorkingSet64, StringFormat={}{0:N0}}" Width="130"/>
             </DataGrid.Columns>
         </DataGrid>
-        
-
     </DockPanel>
 </Window>
